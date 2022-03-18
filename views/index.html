@@ -1,7 +1,21 @@
-% include("header", title="Home")
+% include("header", title="Home", userHasLoggedIn=user_is_logged_in, nav='home')
 
-    <main>
-        index
-    </main>
+<main id="home">
+    <section>
+        <h1>Welcome 👋</h1>
+        <hr>
+        <p><strong>Log in and create a tweet</strong><br><br>If you haven't signed up yet,<br>you must do this first to be able to log in 😉</p>
+        <div>
+            
+            <form method="redirect" action="/signup">
+                <input type="submit" id="signup" value="SIGN UP" class="button">
+            </form>
+            
+            <form method="redirect" action="/login">
+                <input type="submit" id="login" value="LOGIN" class="button">
+            </form>
+        </div>
+    </section>  
+</main>
 
 % include("footer")

@@ -1,0 +1,15 @@
+% include('header', title='Signup Success', userHasLoggedIn=user_is_logged_in, nav='signup-success')
+
+    <main id="signup-success">
+        <section>
+            <h1>
+                Nice!
+            </h1>
+            <p><strong>You can now log in with your E-mail address and your chosen password</strong></p>
+            <form method="redirect" action="/login">
+                <input type="submit" id="login" value="LOGIN" class="button">
+            </form>
+        </section>
+    </main>
+
+% include("footer")

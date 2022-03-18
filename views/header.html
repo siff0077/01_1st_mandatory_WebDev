@@ -5,14 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/app.css">
-    <title>{{ get("title", "ups...") }}</title>
+    <title>{{get("title", "App")}}</title>
 </head>
 <body>
-
-    <nav>
-        <a href="/">Home</a>
-        <a href="/users">Users</a>
-        <a href="/signup">Signup</a>
-        <a href="/login">Login</a>
-        <a href="/login">Logout</a>
-    </nav>
+    % if not get("userHasLoggedIn"):
+        <nav class="{{get('nav', '')}}">
+            <a href="/">HOME 🏠</a>
+            <a href="/signup">SIGNUP 🖊️</a>
+            <a href="/login">LOGIN 🗝️</a>
+        </nav>
+    % end
+    % if get("userHasLoggedIn"):
+        <nav class="{{get('nav', '')}}">
+            <a href="/admin">ADMIN 👤</a>
+            <a href="/users">USERS 👥</a>
+            <a href="/create-tweet">CREATE A TWEET 🐤</a>
+            <a href="/logout">LOG OUT 🔐</a>
+        </nav>
+    % end

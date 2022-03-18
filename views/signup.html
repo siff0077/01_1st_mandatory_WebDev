@@ -1,13 +1,56 @@
-% include("header", title="Sign up")
+% include('header', title='Signup', userHasLoggedIn=user_is_logged_in, nav='signup')
 
-<main>
-    <form action="/signup" method="post">
-      <input name="user_firstname" type="text" placeholder="firstname">
-      <input name="user_lastname" type="text" placeholder="lastname">
-      <input name="user_email" type="text" placeholder="email">
-      <input name="user_password" type="password" placeholder="password">
-      <button>Signup</button>
-    </form>
-  </main>
+<main id="signup">
+    <section>
+        <h1>
+            Sign up to start posting tweets
+        </h1>
+        <hr>
+        <form action="/signup" method="post">
+            <label for="new_user_first_name">
+                Firstname
+                % if first_name_missing == "error":
+                    <span>You need to insert your firstname</span>
+                % end
+                % if first_name_length == "error":
+                    <span>Your firstname need to be minimum 2 or maximum 20 characters</span>
+                % end 
+                <input name="new_user_first_name" id="new_user_first_name" type="text" placeholder="First name" value="{{ user_first_name or '' }}" tabindex="0"/>
+            </label>
+            <label for="new_user_last_name">
+                Lastname
+                % if last_name_missing == "error":
+                    <span>You need insert your lastname</span>
+                % end
+                <input name="new_user_last_name" id="new_user_last_name" type="text" placeholder="Last name" value="{{ user_last_name or '' }}" tabindex="0">
+            </label>
+            <label for="new_user_email">
+                Email
+                % if email_missing == "error":
+                    <span>You need to insert your E-mail address</span>
+                % end
+                % if email_invalid == "error":
+                    <span>Your E-mail address is not valid, insert a valid E-mail address</span>
+                % end
+                % if user_exists_email == "error":
+                    <span>This E-mail already exists in the system </span>
+                % end
+                <input name="new_user_email" id="new_user_email" type="text" placeholder="Email" value="{{ user_email or '' }}" tabindex="0">
+            </label>
+            
+            <label for="new_user_password">
+                Password
+                % if password_short == "error":
+                    <span>Your password must be 6 characters or more</span>
+                % end
+                % if password_missing == "error":
+                    <span>You need to insert a password</span>
+                % end
+                <input name="new_user_password" id="new_user_password" type="password" placeholder="Password" tabindex="0">
+            </label>
+            <input type="submit" value="SIGN UP" class="button">
+        </form>
+    </section>
+</main>
 
-% include("footer")
+% include('footer')

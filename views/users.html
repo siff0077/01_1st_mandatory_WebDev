@@ -1,23 +1,23 @@
-% include("header", title="Users")
+% include('header', title='Users page', userHasLoggedIn=user_is_logged_in, nav='users')
 
-    <main>
-        % if users == []:
-        <div>
-        No users yet
-        </div>
-    % end
-
-
-        <div id="users">
-            % for user in users:
-            <div class="user">
-                <div>ID: {{user["id"]}}</div>
-                <div>Email: {{user["email"]}}</div>
-                <div>Firstname: {{user["firstname"]}}</div>
-                <div>Lastname: {{user["lastname"]}}</div>
-            </div>
+    <main id="users">
+        <section>
+            <h1>Users</h1>
+            % if users == []:
+                <div>
+                    There are no users yet..?
+                </div>
             % end
-        </div>
+            <div id="users">
+                % for user in users:
+                    <div class="user">
+                        <input name="user_id" type="hidden" value='{{ user["id"] }}'>
+                        <p>User: {{ f'{user["first_name"]} {user["last_name"]}' }}</p>
+                        <p>Email: {{ user["email"] }}</p>
+                    </div>
+                % end
+            </div>
+        </section>
     </main>
 
-% include("footer")
+% include('footer')

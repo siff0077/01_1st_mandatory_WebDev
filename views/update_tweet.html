@@ -1,0 +1,28 @@
+% include('header', title='update your tweet', userHasLoggedIn=user_is_logged_in, nav='update-tweet')
+
+    <main id="update-tweet">
+        <section>
+            <h1>
+                Change your tweet here
+            </h1>
+            <form action="{{'/update-tweet/' + tweet['id']}}" method="post">
+                % if error == "empty":
+                    <span>
+                        A tweet must contain either a title, a description or both
+                    </span>
+                % end
+                <label for="edit_tweet_title">
+                    Title
+                    <input name="edit_tweet_title" id="edit_tweet_title" type="text" placeholder="Title"
+                        value="{{tweet['title']}}" />
+                </label>
+                <label for="edit_tweet_description">
+                    Description
+                    <textarea name="edit_tweet_description" id="edit_tweet_description" placeholder="Description">{{tweet['description']}}</textarea>
+                </label>
+                <input type="submit" value="UPDATE TWEET" class="button">
+            </form>
+        </section>
+    </main>
+
+% include('footer')

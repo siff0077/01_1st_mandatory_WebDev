@@ -1,39 +1,32 @@
-% include("header", title="Log in")
+% include('header', title='Login', userHasLoggedIn=user_is_logged_in, nav='login')
 
-    <main>
-        <form action="/login" method="post">
-
-            <div>
-                % if error == "user_email":
-                    <h1>
-                        Please enter valid email
-                    </h1>
+    <main id="login">
+        <section>
+            <h1>
+                Login here and post your tweets
+            </h1>
+            <hr>
+            <form action="/login" method="post">
+                % if error == "no_user":
+                    <span>We didn't find any user matching your inserted information</span>
                 % end
-                <label>
+                <label for="user_email">
                     Email
+                    % if error == "user_email":
+                        <span>Your E-mail address is not valid, insert a valid E-mail address</span>
+                    % end
+                    <input name="user_email" id="user_email" type="text" placeholder="Email" value="{{user_email or ''}}">
                 </label>
-                <input name="user_email" type="text" placeholder="email" value="{{user_email or ''}}">
-            </div>
-            <div>
-                % if error == "user_password":
-                    <h1>
-                        Please enter valid password
-                    </h1>
-                % end
-                <label>
-                    Password (min 6 - max 50 characters)
+                <label for="user_password">
+                    Password
+                    % if error == "user_password":
+                        <span>We didn't find your password in our system, try typing your correct password again</span>
+                    % end
+                    <input name="user_password" id="user_password" type="password" placeholder="Password">
                 </label>
-                <input name="user_password" type="password" placeholder="password">
-            </div>
-            <button>login</button>
-
-        % if error == "unknown_user_information":
-        <h1>
-            Email and/or password not recognized<br>Please sign up to log in
-        </h1>
-        % end
-            
-        </form>
+                <input type="submit" value="LOGIN" class="button">
+            </form>
+        </section>
     </main>
 
 % include("footer")

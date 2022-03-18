@@ -1,9 +1,49 @@
-% include("header", title="Admin")
+% include('header', title='Admin page', userHasLoggedIn=user_is_logged_in, nav='admin')
 
-    <main>
-        This is the users personal page 
-        <br><br>
-        <strong>OBS: Remove signup and users in navigation - Add logout option</strong>
+    <main id="admin">
+        <section>
+            <h1>Tweets 🐣</h1>
+            % if tweets == []:
+                <div>
+                    <p><strong>No tweet to show yet</strong><br>...but you can make one, just click below</p>
+                </div>
+                <form method="redirect" action="/create-tweet">
+                    <input type="submit" id="create" value="CREATE A TWEET" class="button">
+                </form>
+            % end
+            <div id="tweets">
+                % for tweet in tweets:
+                    <div class="tweet">
+                        <input name="tweet_id" type="hidden" value='{{ tweet["id"] }}'>
+                        <div class="tweet_posted_by_and_when">
+                            <p class="name">User: {{tweet["first_name"]}}</p>
+                            <p class="time-posted">{{ f'{tweet["time_posted"].tm_mon}.{tweet["time_posted"].tm_mday}.{tweet["time_posted"].tm_year}' }}</p>
+                            % if tweet["time_edited"]:
+                                <p class="time-updated">Last edited: {{f'{tweet["time_edited"].tm_mon}.{tweet["time_edited"].tm_mday}.{tweet["time_edited"].tm_year}' }}</p>
+                            % end
+                        </div>
+                        <div class="tweet_title_and_content">
+                            % if tweet["title"]:
+                                <h2 class="title">{{ tweet["title"] }}</h2>
+                            % end
+                            % if tweet["description"]:
+                                <p class="description">{{ tweet["description"] }}</p>
+                            % end
+                        </div>
+                        % if user_id == tweet["user_id"]:
+                            <div class="buttons">
+                                <form action='{{"/update-tweet/" + tweet["id"]}}' method="get">
+                                    <input type="submit" id="edit" value="CHANGE THIS TWEET" class="button">
+                                </form>
+                                <form action='{{"/remove-tweet/" + tweet["id"]}}' method="post">
+                                    <input type="submit" id="delete" value="DELETE THIS TWEET" class="button">
+                                </form>
+                            </div>
+                        % end
+                    </div>
+                % end
+            </div>
+        </section>
     </main>
 
-% include("footer")
+% include('footer')

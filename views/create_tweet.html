@@ -1,0 +1,26 @@
+% include('header', title='Create your tweet', userHasLoggedIn=user_is_logged_in, nav='create_tweet')
+
+    <main id="create-tweet">
+        <section>
+            <h1>
+                Create your tweet
+            </h1>
+            <p><strong>Share your thoughts</strong></p>
+            <form action="/create-tweet" method="post">
+                % if error == "empty":
+                    <span>Your tweet must have both a title and a description</span>
+                % end
+                <label for="new_tweet_title">
+                    Title
+                    <input name="new_tweet_title" id="new_tweet_title" type="text" placeholder="Title"/>
+                </label>
+                <label for="new_tweet_description">
+                    What do you have on your mind?
+                    <textarea name="new_tweet_description" id="new_tweet_description" placeholder="Description"></textarea>
+                </label>
+                <input type="submit" value="POST TWEET" class="button">
+            </form>
+        </section>
+    </main>
+
+% include('footer')

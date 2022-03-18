@@ -1,11 +1,14 @@
 from bottle import get, request, view
 
-# Query string will be used in this route
-# Eg. /login?error=user_email
-# Eg. /login?error=user_password
+from is_user_logged_in import is_user_logged_in
+
 @get("/login")
 @view("login")
-def _():
-  error = request.params.get("error")
-  user_email = request.params.get("user-email")
-  return dict(error=error, user_email=user_email)
+def login_view():
+
+    error = request.params.get("error")
+
+    # get email from params to set as value in input 
+    user_email = request.params.get("user_email")
+
+    return dict(error=error, user_email=user_email, user_is_logged_in=is_user_logged_in())

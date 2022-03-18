@@ -1,26 +1,63 @@
-from bottle import post, request, redirect
-import global_file
+from bottle import redirect, request, post
+import re
 import uuid
-import jwt
-import time
+
+import global_file
 
 @post("/signup")
-def _():
-  # VALIDATE
+def signup():
+    # get the info from the form and validate
+    errors = []
+    form_inputs = {}
 
+    # first name
+    new_user_first_name = request.forms.get("new_user_first_name")
+    if not new_user_first_name:
+        errors.append("first-name-missing")
+    elif len(new_user_first_name) < 2 or len(new_user_first_name) > 20:
+        errors.append("first-name-length")
+    if new_user_first_name:
+        form_inputs["first-name"] = new_user_first_name
 
-  user_id = str(uuid.uuid4())
-  user_firstname = request.forms.get("user_firstname")
-  user_lastname = request.forms.get("user_lastname")
-  user_email = request.forms.get("user_email")
-  user_password = request.forms.get("user_password")
+    # last name
+    new_user_last_name = request.forms.get("new_user_last_name")
+    if not new_user_last_name:
+        errors.append("last-name-missing")
+    else:
+        form_inputs["last-name"] = new_user_last_name
 
-  # encoded_jwt_user_information = jwt.encode({"user_id":user_id, "user_email":user_email, "user_firstname":user_firstname, "user_lastname":user_lastname}, "30b6aad5-493e-4253-8de6-1d118d36f633cae8b31a-7ee7-4c8e-9adf-5cc98b3e3af4", algorithm="HS256")
+    # email
+    new_user_email = request.forms.get("new_user_email")
+    if not new_user_email:
+        errors.append("email-missing")
+    elif not re.match(global_file.REGEX_EMAIL, new_user_email):
+        errors.append("email-invalid")
+    if not new_user_email == '':
+        form_inputs["email"] = new_user_email
 
-  # print("#"*30)
-  # print(encoded_jwt_user_information)
+    # password
+    new_user_password = request.forms.get("new_user_password")
+    if not new_user_password:
+        errors.append("password-missing")
+    elif len(new_user_password) < 6:
+        errors.append("password-short")
 
-  user = {"id":user_id, "email":user_email, "firstname":user_firstname, "lastname":user_lastname, "password":user_password}
-  global_file.USERS.append(user)
-  print(global_file.USERS)
-  return redirect(f"/signup-succes?user-email={user_email}&user-firstname={user_firstname}&user-lastname={user_lastname}&user-password={user_password}")
+    # potential error messages
+    if not errors == []:
+        error_string = f'{"=error&".join(errors)}=error'
+        form_input_string = ''
+        for value in form_inputs:
+            form_input_string += f"&{value}={form_inputs[value]}"
+        return redirect(f"/signup?{error_string}{form_input_string}")
+    
+    # append user to USERS
+    new_user = {
+        "first_name": new_user_first_name,
+        "last_name": new_user_last_name,
+        "email": new_user_email,
+        "password": new_user_password,
+        "id": str(uuid.uuid4())
+    }
+    global_file.USERS.append(new_user)
+
+    return redirect("/signup-success")

@@ -9,46 +9,296 @@ body{
     height: 100vh;
     overflow: hidden;
     overflow-y: scroll;
-    background: rgba(0, 0, 0, 0.1);
+    background: whitesmoke;
     font-size: 1.1rem;
     font-weight: 300;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 nav{
     display: grid;
-    grid-template-columns: 100fr 100fr 100fr 100fr 100fr;
+    grid-template-columns: 100fr 100fr 100fr;
     align-items: center;
     height: 4rem;
     justify-items: center;
     width: 100%;
     position: fixed; top: 0; left: 0;
     z-index: 10;
-    background: rgba(30, 160, 250);
-    border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+    background: #650D1B;
+    border-bottom: 2px solid #3b0810;
 }
 
 nav a{
     text-decoration: none;
     color: white;
     font-size: 1.3rem;
+    font-weight: 700;
+}
+
+nav a:hover {
+    cursor: pointer;
+    border-bottom: solid 2px #ddc6ca;
+    color: #ddc6ca;
 }
 
 main{
     margin-top: 5rem;
     padding: 0 1rem;
+    display: flex;
+    justify-content: center;
 }
 
 footer{
     position: fixed; bottom: 0; left: 0;
     width: 100%;
-    height: 0.2rem;
-    background: rgba(30, 160, 250);
+    background: #650D1B;
+    border-top: 2px solid #3b0810;
+    color: white;
 }
 
-/* .item{
+section {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    margin: 30px 0;
+    text-align: center;
+}
+
+hr {
     width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #999;
-    background: white;
-} */
+    margin-bottom: 30px;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+span {
+    font-size: 14px;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.button {
+    width: 300px;
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #650D1B;
+    border: none;
+    resize: none;
+    outline: none;
+    font-weight: 700;
+    font-size: 1rem;
+    color: whitesmoke;
+}
+
+.button:hover {
+    cursor: pointer;
+    color: #ddc6ca;
+}
+
+/* INDEX (HOME PAGE) */
+#home form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#home form label {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+/* SIGNUP */
+#signup form {
+    border: solid 2px #650D1B;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f8e7ea;
+    width: 80%;
+    padding-top: 20px;
+}
+
+#signup form label {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    width: 80%;
+}
+
+#signup input[type="text"], #signup input[type="password"] {
+    margin-top: 3px;
+}
+
+#signup .button {
+    width: 40%;
+    margin: 20px 0;
+}
+
+/* SIGNUP SUCCESS */
+#signup-success form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#signup-success form label {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+/* LOGIN */
+#login form {
+    border: solid 2px #650D1B;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f8e7ea;
+    width: 80%;
+    padding-top: 20px;
+}
+
+#login form label {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    width: 80%;
+}
+
+#login input[type="text"], #login input[type="password"] {
+    margin-top: 3px;
+}
+
+#login .button {
+    width: 40%;
+    margin: 20px 0;
+}
+
+/* ADMIN */
+#admin form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#admin form label {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+#admin .tweet {
+ border: solid 2px #650D1B;
+ background-color: #f8e7ea;
+ display: flex;
+ flex-direction: column;
+ padding: 10px;
+ margin-top: 30px;
+}
+
+#admin .tweet:first-of-type {
+    margin-top: 0px;
+}
+
+#admin .tweet p, #admin .tweet h2 {
+    text-align: left;
+}
+
+#admin .tweet .tweet_posted_by_and_when {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#admin .tweet_title_and_content h2 {
+    margin-bottom: 10px;
+} 
+
+#admin .tweet .buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+/* USERS */
+#users .user {
+    border: solid 2px #650D1B;
+    background-color: #f8e7ea;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 30px;
+    justify-items: flex-start;
+    
+}
+
+#users .user:first-of-type {
+    margin-top: 0px;
+}
+
+#users .tweet p {
+    text-align: left;
+}
+
+/* CREATE TWEET */
+#create-tweet form {
+    border: solid 2px #650D1B;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f8e7ea;
+    width: 80%;
+    padding-top: 20px;
+}
+
+#create-tweet form label {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    width: 80%;
+}
+
+#create-tweet input[type="text"], #create-tweet textarea {
+    margin-top: 3px;
+}
+
+#create-tweet .button {
+    width: 40%;
+    margin: 20px 0;
+}
+
+/* UPDATE TWEET */
+#update-tweet form {
+    border: solid 2px #650D1B;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f8e7ea;
+    width: 80%;
+    padding-top: 20px;
+}
+
+#update-tweet form label {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    width: 80%;
+}
+
+#update-tweet input[type="text"], #create-tweet textarea {
+    margin-top: 3px;
+}
+
+#update-tweet .button {
+    width: 40%;
+    margin: 20px 0;
+}
+

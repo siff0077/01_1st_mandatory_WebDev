@@ -1,7 +1,12 @@
+import uuid
+import time
+
 USERS = []
+SESSIONS = []
+TWEETS = []
+
 
 REGEX_EMAIL = '^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
 
-COOKIE_SECRET = "30b6aad5-493e-4253-8de6-1d118d36f633cae8b31a-7ee7-4c8e-9adf-5cc98b3e3af4"
+JWT_VALIDATION_KEY = f"{str(uuid.uuid4())}-{str(uuid.uuid4())}"
 
-SESSIONS = []
